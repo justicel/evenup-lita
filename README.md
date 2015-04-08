@@ -1,62 +1,311 @@
-#modulename
+[![Puppet Forge](http://img.shields.io/puppetforge/v/evenup/lita.svg)](https://forge.puppetlabs.com/evenup/lita)
+[![Build Status](https://travis-ci.org/evenup/evenup-lita.png?branch=master)](https://travis-ci.org/evenup/evenup-lita)
 
-####Table of Contents
+#### Table of Contents
 
 1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with [Modulename]](#setup)
-    * [What [Modulename] affects](#what-[modulename]-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with [Modulename]](#beginning-with-[Modulename])
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+2. [Module Description](#module-description)
+3. [Setup](#setup)
+    * [What lita affects](#what-lita-affects)
+    * [Beginning with lita](#beginning-with-lita)
+4. [Usage](#usage)
+5. [Reference](#reference)
+6. [Limitations](#limitations)
+7. [Development](#development)
+8. [Changelog/Contributors](#changelog-contributors)
 
-##Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves. This is your 30 second elevator pitch for your module. Consider including OS/Puppet version it works with.
+## Overview
 
-##Module Description
+A Puppet module that installs and configures [Lita](http://lita.io) bots
 
-If applicable, this section should have a brief description of the technology the module integrates with and what that integration enables. This section should answer the questions: "What does this module *do*?" and "Why would I use it?"
+## Module Description
 
-If your module has a range of functionality (installation, configuration, management, etc.) this is the time to mention it.
+[Lita](http://lita.io) is a Chatbot written in ruby supporting various chat services and handlers.  This puppet module will configure a system for Lita and configure one or multiple bots.
 
-##Setup
+## Setup
 
-###What [Modulename] affects
+### What lita affects
 
-* A list of files, packages, services, or operations that the module will alter, impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
+* (*optional*) Manage bundler and packages required to build lita gems
+* Lita bots and associated services
 
-###Setup Requirements **OPTIONAL**
+### Beginning with lita
 
-If your module requires anything extra before setting up (pluginsync enabled, etc.), mention it here.
+Installation of the lita module:
 
-###Beginning with [Modulename]
+```
+  puppet module install evenup-lita
+```
 
-The very basic steps needed for a user to get the module up and running.
+## Usage
 
-If your most recent release breaks compatibility or requires particular steps for upgrading, you may wish to include an additional section here: Upgrading (For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+Insallation and creation of 'test bot' using the irc adapter
 
-##Usage
+```puppet
+      class { 'lita':
+        bundler_binpath => '/usr/bin'
+      }
 
-Put the classes, types, and resources for customizing, configuring, and doing the fancy stuff with your module here.
+      lita::bot { 'test bot':
+        adapter        => ':irc',
+        adapter_config => { 'server' => 'irc.freenode.net', 'channels' => ['#litabot'] }
+      }
+```
 
-##Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module. This section should include all of the under-the-hood workings of your module so people know what the module is touching on their system but don't need to mess with things. (We are working on automating this section!)
+## Reference
 
-##Limitations
+### Public methods
 
-This is where you list OS compatibility, version compatibility, etc.
+#### Class: lita
 
-##Development
+Main class for setting bot global defaults and global configuration
 
-Since your module is awesome, other users will want to play with it. Let them know what the ground rules for contributing are.
+#####`base_path`
 
-##Release Notes/Contributors/Etc **Optional**
+String.  Path Lita bots should be installed in
 
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You may also add any additional sections you feel are necessary or important to include here. Please use the `## ` header.
+Default: /opt/lita
+
+#####`manage_bundler`
+
+Boolean.  Should the bundler gem be managed by this module
+
+Default: false
+
+#####`bundler_package`
+
+String.  Name of the package to install if managing the bundler gem
+
+Default: bundler
+
+#####`bundler_provider`
+
+String.  Provider used to install the bundler gem if managed by this module
+
+Default: gem
+
+#####`bundler_binpath`
+
+String.  Path to the bundler binary
+
+Default: /bin
+
+#####`extra_packages`
+
+String/Array of Strings.  If needed, a list of packages to manage with this module to support gem building for bots
+
+#####`version`
+
+String.  Default version of lita to use for bots
+
+Default: latest
+
+#####`adapter`
+
+String.  Default adapter to use for bots
+
+Default: :shell
+
+#####`adapter_config`
+
+Hash.  Default adapter configuration to use for bots
+
+Default: {}
+
+Format: {'key' => 'value'}
+
+#####`bot_name`
+
+String.  Default name to use for bots
+
+Default: lita
+
+#####`gems`
+
+Array of Strings.  Default gems to use for bots
+
+Default: []
+
+#####`mention_name`
+
+String.  Default mention name to use for bots
+
+Default: lita
+
+#####`plugins`
+
+String.  Default plugins to use for bots
+
+Default: []
+
+#####`plugin_config`
+
+Hash.  Default plugin configuration to use for bots
+
+Default: []
+
+Format: { 'plugin_name' => { 'key' => 'value' } }
+
+#####`admins`
+
+Array of Strings.  Default list of admins to use for bots
+
+Default: []
+
+#####`locale`
+
+String.  Default localeto use for bots
+
+Default: en
+
+#####`log_level`
+
+String.  Default log_level to use for bots
+
+Default: :info
+
+#####`http_host`
+
+String.  Default host to listen for HTTP requests on for bots
+
+Default: '0.0.0.0'
+
+#####`http_port`
+
+Integer.  Default port to listen for HTTP requests on for bots
+
+Default: 8080
+
+#####`redis_host`
+
+String.  Default redis host to use for bots
+
+Default: '127.0.0.1'
+
+#####`redis_port`
+
+Integer.  Default redis port to use for bots
+
+Default: 6379
+
+
+#### Define: lita::bot
+
+Configures individual lita bots.
+
+#####`version`
+
+String.  Version of lita to use
+
+Default: latest
+
+#####`adapter`
+
+String.  Adapter to be used by this bot
+
+Default: :shell
+
+#####`adapter_config`
+
+Hash.  Adapter configuration for this bot
+
+Default: {}
+
+Format: {'key' => 'value'}
+
+#####`bot_name`
+
+String.  Name to be used by the bot
+
+Default: lita
+
+#####`gems`
+
+Array of Strings.  Gems needed for this bot
+
+Default: []
+
+#####`mention_name`
+
+String.  Mention name for this bot
+
+Default: lita
+
+#####`plugins`
+
+String.  Plugins to be used by this bot
+
+Default: []
+
+#####`plugin_config`
+
+Hash.  Plugin configuration to be used by this bot
+
+Default: []
+
+Format: { 'plugin_name' => { 'key' => 'value' } }
+
+#####`admins`
+
+Array of Strings.  Admin names of this bot
+
+Default: []
+
+#####`locale`
+
+String.  Locale to be used by this bot
+
+Default: en
+
+#####`log_level`
+
+String.  Log_level for this bot
+
+Default: :info
+
+#####`http_host`
+
+String.  Address to open listening port on for this bot
+
+Default: '0.0.0.0'
+
+#####`http_port`
+
+Integer.  Port to listen on for this bot
+
+Default: 8080
+
+#####`redis_host`
+
+String.  Redis host to use for this bot
+
+Default: '127.0.0.1'
+
+#####`redis_port`
+
+Integer.  Port to connect to redis on
+
+Default: 6379
+
+
+### Private classes
+
+* `lita::params`: Default lita configuration
+
+## Limitations
+
+* Only tested on RHEL/CentOS 7
+
+## Development
+
+Improvements and bug fixes are greatly appreciated.  See the [contributing guide](https://github.com/evenup/evenup-lita/CONTRIBUTING.md) for
+information on adding and validating tests for PRs.
+
+
+## Changelog / Contributors
+
+[Changelog](https://github.com/evenup/evenup-lita/blob/master/CHANGELOG)
+
+[Contributors](https://github.com/evenup/evenup-lita/graphs/contributors)

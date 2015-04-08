@@ -1,3 +1,11 @@
+# == Class: lita
+#
+# Manages lita bots
+#
+# === Authors
+#
+# * Justin Lambert <mailto:jlambert@letsevenup.com>
+#
 class lita (
   $base_path        = $::lita::params::base_path,
   $manage_bundler   = $::lita::params::manage_bundler,
@@ -9,16 +17,15 @@ class lita (
   # bot defaults
   $version          = $::lita::params::version,
   $adapter          = $::lita::params::adapter,
+  $adapter_config   = $::lita::params::adapter_config,
   $bot_name         = $::lita::params::name,
   $gems             = $::lita::params::gems,
   $mention_name     = $bot_name,
   $plugins          = $::lita::params::plugins,
   $plugin_config    = $::lita::params::plugin_config,
   $admins           = $::lita::params::admins,
-  $adapter          = $::lita::params::adapter,
   $locale           = $::lita::params::locale,
   $log_level        = $::lita::params::log_level,
-  $adapter_config   = $::lita::params::adapter_config,
   $http_host        = $::lita::params::http_host,
   $http_port        = $::lita::params::http_port,
   $redis_host       = $::lita::params::redis_host,

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'lita', :type => :class do
+  let(:facts) { { :path => '/tmp', :id => 0 } }
 
   it { should create_class('lita') }
   it { should contain_user('lita') }
