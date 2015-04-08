@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'lita::bot', :type => :define do
+  let(:facts) { { :path => '/tmp', :id => 0 } }
   let(:pre_condition) { 'class { "lita": }' }
   let(:title) { 'test bot' }
 

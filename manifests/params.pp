@@ -1,3 +1,8 @@
+# == Class: lita::params
+#
+# Sets the default parameters for lita
+#
+#
 class lita::params {
   # class
   $base_path = '/opt/lita'

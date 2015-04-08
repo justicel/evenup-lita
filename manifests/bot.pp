@@ -1,3 +1,8 @@
+# == Define: lita::bot
+#
+# Configures an individual lita bot
+#
+#
 define lita::bot (
   $version          = $::lita::version,
   $adapter          = $::lita::adapter,
