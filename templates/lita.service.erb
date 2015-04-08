@@ -1,0 +1,13 @@
+[Unit]
+Description=Lita (%i) bot
+After=network.target
+
+[Service]
+EnvironmentFile=-/etc/sysconfig/lita-%i
+Type=simple
+ExecStart=<%= @bundler_binpath %>/bundle exec lita
+ExecReload=<%= @bundler_binpath %>/bundle exec lita
+ExecStop=<%= @bundler_binpath %>/bundle exec lita
+
+[Install]
+WantedBy=multi-user.target

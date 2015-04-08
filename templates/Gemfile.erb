@@ -1,0 +1,18 @@
+source "https://rubygems.org"
+
+gem "lita" <% if @version != 'latest' -%>, "<%= @version -%>"<% end %>
+<% if @adapter != 'shell' -%>
+gem "lita-<%= scope.function_stringify_symbol([@adapter]) %>"
+<% end -%>
+
+<% if @plugins -%>
+<% @plugins.sort.each do |plugin| -%>
+gem "lita-<%= plugin %>"
+<% end -%>
+<% end -%>
+
+<% if @gems -%>
+<% @gems.sort.each do |gem| -%>
+gem "<%= gem %>"
+<% end -%>
+<% end -%>

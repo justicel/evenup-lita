@@ -1,0 +1,22 @@
+Lita.configure do |config|
+  config.robot.name = <%= scope.function_typecast([@bot_name]) %>
+  config.robot.mention_name = <%= scope.function_typecast([@mention_name]) %>
+  config.robot.locale = <%= scope.function_typecast([@locale]) %>
+  config.robot.log_level = <%= scope.function_typecast([@log_level]) %>
+  config.robot.adapter = <%= scope.function_typecast([@adapter]) %>
+  <% if @admins && @admins.length > 0 -%>
+  config.robot.admins = <%= scope.function_typecast([@admins]) %>
+  <% end -%>
+  <% @adapter_config.each do |k,v| -%>
+  config.adapters.<%= scope.function_stringify_symbol([@adapter]) %>.<%= k %> = <%= scope.function_typecast([v]) %>
+  <% end -%>
+  config.http.host = "<%= @http_host %>"
+  config.http.port = <%= @http_port %>
+  config.redis[:host] = "<%= @redis_host %>"
+  config.redis[:port] = <%= @redis_port %>
+  <% @plugin_config.each do |plugin,config| -%>
+  <% plugin.each do |k,v| -%>
+  config.handers.<%= plugin %>.<%= scope.function_stringify_symbol([k]) %> = <%= v %>
+  <% end -%>
+  <% end -%>
+end

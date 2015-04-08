@@ -1,0 +1,11 @@
+fixtures:
+  repositories:
+  forge_modules:
+    stdlib:
+      repo: "puppetlabs/stdlib"
+      ref: "3.2.0"
+    systemd:
+      repo: "camptocamp/systemd"
+      ref: "0.1.1"
+  symlinks:
+    lita: "#{source_dir}"
