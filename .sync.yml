@@ -1,4 +1,16 @@
 ---
   .travis.yml:
+    script: "\"bundle exec rake validate && bundle exec rake test SPEC_OPTS='--format documentation'\""
+    includes:
+      - rvm: 1.9.3
+        env: PUPPET_GEM_VERSION="~> 3.3.0"
+      - rvm: 1.9.3
+        env: PUPPET_GEM_VERSION="~> 3.0" FUTURE_PARSER="yes"
+      - rvm: 2.0.0
+        env: PUPPET_GEM_VERSION="~> 3.3.0"
+      - rvm: 2.0.0
+        env: PUPPET_GEM_VERSION="~> 3.0" FUTURE_PARSER="yes"
+      - rvm: 2.1.0
+        env: PUPPET_GEM_VERSION="~> 3.0" FUTURE_PARSER="yes"
     hc_secure: "O4brQNu9Hk4IUfgaNU+R8QWe0A/5ucmEBzTPX3kzrCXALHP1f4opc3MgIFzPohc/O9Y64oNcV/TZk2Bwy1mUunxCubfQfF4G1VoE0yQc/z7qOBOrYPvOU2S5srcrbwyg7zBt1H0dXKoDvgoW4fSTz4LMv3ahIlYZYmgmaeZioE4="
 
