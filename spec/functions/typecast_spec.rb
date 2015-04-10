@@ -65,6 +65,9 @@ describe "the typecast function" do
   it "should return strings" do
     result = scope.function_typecast(['bob'])
     expect(result).to(eq('"bob"'))
+
+    result = scope.function_typecast(['4bob'])
+    expect(result).to(eq('"4bob"'))
   end
 
 end

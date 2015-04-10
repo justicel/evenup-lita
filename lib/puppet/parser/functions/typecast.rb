@@ -33,7 +33,7 @@ a ruby configuration file
       when /^[0-9]+\.[0-9]+$/
         # found float
         arguments[0].to_f
-      when /^[0-9]+/
+      when /^[0-9]+$/
         # found Fixnum
         arguments[0].to_i
       else
