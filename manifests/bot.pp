@@ -12,7 +12,6 @@ define lita::bot (
   $plugins          = $::lita::plugins,
   $plugin_config    = $::lita::plugin_config,
   $admins           = $::lita::admins,
-  $adapter          = $::lita::adapter,
   $locale           = $::lita::locale,
   $log_level        = $::lita::log_level,
   $adapter_config   = $::lita::adapter_config,

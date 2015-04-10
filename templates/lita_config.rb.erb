@@ -15,8 +15,8 @@ Lita.configure do |config|
   config.redis[:host] = "<%= @redis_host %>"
   config.redis[:port] = <%= @redis_port %>
   <% @plugin_config.each do |plugin,config| -%>
-  <% plugin.each do |k,v| -%>
-  config.handers.<%= plugin %>.<%= scope.function_stringify_symbol([k]) %> = <%= v %>
+  <% config.each do |k,v| -%>
+  config.handlers.<%= plugin %>.<%= scope.function_stringify_symbol([k]) %> = <%= scope.function_typecast([v]) %>
   <% end -%>
   <% end -%>
 end
