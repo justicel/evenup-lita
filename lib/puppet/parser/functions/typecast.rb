@@ -2,6 +2,8 @@
 # typecast.rb
 #
 
+# Mostly taken from the lita chef module: https://github.com/litaio/chef-lita
+
 module Puppet::Parser::Functions
   newfunction(:typecast, :type => :rvalue, :doc => <<-EOS
 This outputs ruby argumentsects attempting to maintain their format to be read in from

@@ -44,6 +44,7 @@ define lita::bot (
   file { "${bot_dir}/lita_config.rb":
     owner   => 'lita',
     group   => 'lita',
+    mode    => '0440',
     content => template('lita/lita_config.rb.erb'),
     notify  => Service["lita_${_name}"],
   }
