@@ -4,6 +4,7 @@ gem "lita" <% if @version != 'latest' -%>, "<%= @version -%>"<% end %>
 <% if @adapter != 'shell' -%>
 gem "lita-<%= scope.function_stringify_symbol([@adapter]) %>"
 <% end -%>
+gem "rack", "1.6.4"
 
 <% if @plugins -%>
 <% @plugins.sort.each do |plugin| -%>
