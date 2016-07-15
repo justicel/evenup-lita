@@ -8,6 +8,7 @@ define lita::bot (
   $adapter          = $::lita::adapter,
   $bot_name         = $::lita::name,
   $gems             = $::lita::gems,
+  $custom_gems      = $::lita::custom_gems,
   $mention_name     = $::lita::mention_name,
   $plugins          = $::lita::plugins,
   $plugin_config    = $::lita::plugin_config,

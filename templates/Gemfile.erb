@@ -17,3 +17,9 @@ gem "lita-<%= plugin %>"
 gem "<%= gem %>"
 <% end -%>
 <% end -%>
+
+<% if @custom_gems -%>
+<% @custom_gems.sort.each do |gem| -%>
+<%= gem %>
+<% end -%>
+<% end -%>
